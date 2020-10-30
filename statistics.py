@@ -65,7 +65,7 @@ def final_estimate(*args):
     returns: float
     """
     if not all((isinstance(e, (int, float)) for arg in args for e in arg)):
-        raise ValueError
+        raise TypeError
     onp = args
     op = tuple((arg[0], arg[-1]) for arg in args)
     est = probability(*onp)

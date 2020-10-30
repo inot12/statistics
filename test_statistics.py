@@ -82,7 +82,7 @@ class TestStatisticsBadInput(unittest.TestCase):
             
     def test_final_estimate_input(self):
         """final_estimate() accepts only tuples of integers or floats."""
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             st.final_estimate((1, 3, 12), (1, 1.5, 'a'), (3, 6.25, 11))
 
        
