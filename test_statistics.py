@@ -32,18 +32,18 @@ class TestStatistics(unittest.TestCase):
 #         with self.assertRaises(ValueError):
 #             st.stddev(5, 1)
         
-    def test_probability(self):
-        """Test probability() for known input."""
+    def test_tasks_estimate(self):
+        """Test tasks_estimate() for known input."""
         tol = 1
         self.assertAlmostEqual(
-            st.probability((1, 3, 12), (1, 1.5, 14), (3, 6.25, 11)),
+            st.tasks_estimate((1, 3, 12), (1, 1.5, 14), (3, 6.25, 11)),
             14.2, places=tol)
         
-    def test_seq_stddev(self):
-        """Test seq_stddev() for known input."""
+    def test_tasks_stddev(self):
+        """Test tasks_stddev() for known input."""
         dt = 0.01
         self.assertAlmostEqual(
-            st.seq_stddev((1, 12), (1, 14), (3, 11)),
+            st.tasks_stddev((1, 12), (1, 14), (3, 11)),
             3.13, delta=dt)
         
     def test_final_estimate(self):

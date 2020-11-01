@@ -8,6 +8,7 @@ Calculate the probability distribution of a sequence of tasks.
 The estimate may either be in hours or days.
 """
 
+import cProfile
 import math
 
 
@@ -27,8 +28,8 @@ def estimate(o, n, p):
     return (o + 4*n + p)/6
 
 
-def probability(*args):
-    """Return the probability distribution of a series of tasks.
+def tasks_estimate(*args):
+    """Return the estimate of a series of tasks.
     
     args -- tuples of 3 floats, (o, n, p).
     
@@ -39,7 +40,7 @@ def probability(*args):
 
 def stddev(o, p):
     """
-    Return standard deviation.
+    Return standard deviation for an estimate of a task.
     """
     if o <= 0 or p <= 0:
         raise ValueError
@@ -48,12 +49,13 @@ def stddev(o, p):
     return (p-o) / 6
 
 
-def seq_stddev(*args):
+def tasks_stddev(*args):
     """Return standard deviation of sequence of tasks.
     
     args -- tuples of two floats, (o, p)
     
-    returns: float"""
+    returns: float
+    """
     return math.sqrt(sum((stddev(*arg)**2 for arg in args)))
 
 
@@ -68,13 +70,15 @@ def final_estimate(*args):
         raise TypeError
     onp = args
     op = tuple((arg[0], arg[-1]) for arg in args)
-    est = probability(*onp)
-    sig = seq_stddev(*op)
+    est = tasks_estimate(*onp)
+    sig = tasks_stddev(*op)
     return est + sig
 
 
 def main():
     print(final_estimate((1, 3, 12), (1, 1.5, 14), (3, 6.25, 11)))
+    print(final_estimate((1, 3, 12)))
+    cProfile.run('final_estimate((1, 3, 12), (1, 1.5, 14), (3, 6.25, 11))')
 
 
 if __name__ == "__main__":
