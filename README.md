@@ -1,2 +1,2 @@
-# statistics
-Probability estimation
+# Statistics
+Probability estimation.
